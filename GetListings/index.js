@@ -1,5 +1,5 @@
 var request = require("request");
-var util = require('util'); // todo - remove this
+var util = require('util');
 
 
 //
@@ -42,38 +42,41 @@ function generateScores() {
 
 /* called by Lambda */
 exports.handler = (event, context, callback) => {
-    
-
 	/* TODO - Implement. Model after the code from Manual Run */
-
-
     callback(null, 'Hello from Lambda');
 };
-
 
 /* Manual Run */
 // only run if 3rd argument is 'manual'
 if(process.argv[2] == "manual") {
-	var output = {};
+
+	var event = {
+		// Elko zip code
+		zip: 89801	
+	};
+	var intermediaryObject = {};
+	var output = [];
+
 	console.log("INFO - running in manual mode.");
 
-	gatherListings(89502, function(err, listings) {
+
+	gatherListings(event.zip, function(err, listings) {
 		if(err) console.log("ERROR: %s", err);
 		else {
 
 			// create each listing object
 			listings.forEach(function(listing) {
 				// construct listing object
-				output.id = listing.listing.id;
-				output.name = listing.listing.name;
-				output.beds = listing.listing.beds;
-				output.pricePerNight = listing.pricing_quote.rate.amount;
-				output.location = {
+				intermediaryObject.id = listing.listing.id;
+				intermediaryObject.name = listing.listing.name;
+				intermediaryObject.beds = listing.listing.beds;
+				intermediaryObject.pricePerNight = listing.pricing_quote.rate.amount;
+				intermediaryObject.location = {
 					lat: listing.listing.lat,
 					long: listing.listing.lng
 				};
 
-				console.log("Output: %s", util.inspect(output, {showHidden: false, depth: null}))
+				output.push(JSON.stringify(intermediaryObject));
 
 				// DEBUG 
 				// console.log("Listing id: %s", listing.listing.id);
@@ -83,12 +86,12 @@ if(process.argv[2] == "manual") {
 				// console.log("Location: %s Lat, %s Long", listing.listing.lat, listing.listing.lng);
 				// console.log("---------------------------------------------");
 			});
+
+			// since this is manual mode, print the output to terminal
+			console.log(output);
 		}
 	});
 
 }
-
-
-
 
 
