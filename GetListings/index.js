@@ -1,7 +1,5 @@
 var request = require("request");
 var util = require('util');
-var zipCodes = require('./data.json');
-
 
 //
 // @about - gathers AirBnB listings from a specified zip code
@@ -38,12 +36,16 @@ function gatherListings(zip, state, cb) {
 /* called by Lambda */
 exports.handler = (event, context, callback) => {
 
+	var output = [];
+
     gatherListings(event.zip, event.state, function(err, listings) {
 		if(err) console.log("ERROR: %s", err);
 		else {
 
 			// create each listing object
 			listings.forEach(function(listing) {
+
+				var intermediaryObject = {};
 				// construct listing object
 				intermediaryObject.id = listing.listing.id;
 				intermediaryObject.name = listing.listing.name;
@@ -54,9 +56,10 @@ exports.handler = (event, context, callback) => {
 					long: listing.listing.lng
 				};
 
-				callback(null, JSON.stringify(intermediaryObject));				
+				output.push(intermediaryObject);						
 			});
 
+			callback(null, JSON.stringify(output));	
 		}
 	});
 };
@@ -123,6 +126,8 @@ if(process.argv == 4 || process.argv[2] == "manual")
 // only run if 3rd argument is 'all'
 if(process.argv[2] == "all") 
 {
+	var zipCodes = require('./data.json');
+	
 	// Start local timer
 	console.time("Execution Time");
 

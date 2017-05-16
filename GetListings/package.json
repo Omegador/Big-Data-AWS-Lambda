@@ -1,10 +1,10 @@
 {
-  "name": "gatherListings_AirBnB",
+  "name": "GetListings",
   "version": "1.0.0",
   "description": "gathers AirBnB listings and ranks them by some algorithm to determine which is the best deal",
   "main": "index.js",
   "scripts": {
-    "zip": "zip -r gatherListings_AirBnB.zip index.js node_modules/"
+    "zip": "zip -r GetListings.zip index.js node_modules/"
   },
   "author": "Max Wiegant",
   "license": "MIT",
