@@ -231,7 +231,7 @@ exports.handler = (event, context, callback) => {
 	generateZScore(event.lat, event.lng, function(err, score) {
 		var output = {};
 		output.score = score;
-		callback(null, output);
+		callback(null, JSON.stringify(output));
 	});
 
 	/* TODO - Implement. Model after the code from Manual Run */
