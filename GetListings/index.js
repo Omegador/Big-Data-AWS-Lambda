@@ -61,18 +61,20 @@ exports.handler = (event, context, callback) => {
 };
 
 /* Manual Run */
-// only run if 3rd argument is 'manual'
-if(process.argv[2] == "manual") 
+if(process.argv > 2) 
 {
-
-	var event = 
-	{
-		// Elko zip code
-		zip: 89801,
-		state: "NV"
-	};
+	var event = {};
 	var intermediaryObject = {};
 	var output = [];
+
+	if(process.argv[2] == "manual") {
+		// Elko zip code
+		event.zip = 89801,
+		event.state = "NV"
+	} else {
+		event.zip = process.argv[2];
+		event.state = process.argv[3];		
+	}
 
 	console.log("INFO - running in manual mode.");
 
