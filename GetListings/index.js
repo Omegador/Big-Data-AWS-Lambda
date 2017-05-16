@@ -9,17 +9,17 @@ var util = require('util');
 // @return error - return error if there was one
 // @return data - return listings if no error
 //
-function gatherListings(zip, cb) {
+function gatherListings(zip, state, cb) {
 	var options = {};
  	options.url = "https://www.airbnb.com/api/v2/explore_tabs?version=1.1.0&_format=for_explore_search_web&items_per_grid=60000&fetch_filters=true&supports_for_you_v3=true&timezone_offset=-420&auto_ib=true&tab_id=home_tab&allow_override%5B%5D=&key=d306zoyjsyarp7ifhu67rjxn52tv0t20&currency=USD&locale=en";
 	options.headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'};
 	var data;
 
 	// add zip to querystring parameter
-	options.url += "&location=" + zip;
+	options.url += "&location=" + zip + "%2C+" + state + "%2C+United+States";
 
 	// DEBUG
-	// console.log(options);
+	console.log(options);
 
 	// make the request to airbnb api
 	request(options, function(err, response, body) {
@@ -32,18 +32,31 @@ function gatherListings(zip, cb) {
 }
 
 
-function generateScores() {
-  // TODO
-}
-
-
-// TODO - create one general function that both the export and Manual run will call to start the program
-
 
 /* called by Lambda */
 exports.handler = (event, context, callback) => {
-	/* TODO - Implement. Model after the code from Manual Run */
-    callback(null, 'Hello from Lambda');
+
+    gatherListings(event.zip, event.state, function(err, listings) {
+		if(err) console.log("ERROR: %s", err);
+		else {
+
+			// create each listing object
+			listings.forEach(function(listing) {
+				// construct listing object
+				intermediaryObject.id = listing.listing.id;
+				intermediaryObject.name = listing.listing.name;
+				intermediaryObject.beds = listing.listing.beds;
+				intermediaryObject.pricePerNight = listing.pricing_quote.rate.amount;
+				intermediaryObject.location = {
+					lat: listing.listing.lat,
+					long: listing.listing.lng
+				};
+
+				callback(null, JSON.stringify(intermediaryObject));				
+			});
+
+		}
+	});
 };
 
 /* Manual Run */
@@ -52,7 +65,8 @@ if(process.argv[2] == "manual") {
 
 	var event = {
 		// Elko zip code
-		zip: 89801	
+		zip: 89801,
+		state: "NV"
 	};
 	var intermediaryObject = {};
 	var output = [];
@@ -60,7 +74,7 @@ if(process.argv[2] == "manual") {
 	console.log("INFO - running in manual mode.");
 
 
-	gatherListings(event.zip, function(err, listings) {
+	gatherListings(event.zip, event.state, function(err, listings) {
 		if(err) console.log("ERROR: %s", err);
 		else {
 
