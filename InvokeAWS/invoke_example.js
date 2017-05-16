@@ -1,5 +1,5 @@
 var aws = require('aws-sdk');
-var zips = require('./data.json');
+var zip = require('./data.json');
 
 var lambda = new aws.Lambda({
   accessKeyId: 'AKIAJSAKDSVLYH7ZIZEQ',
@@ -8,10 +8,10 @@ var lambda = new aws.Lambda({
 });
 
 
-zipCodes.forEach(function(zips) {
+zipCodes.forEach(function(zip) {
   //invoke lambda
   lambda.invoke({
-    FunctionName: 'testapp',
+    FunctionName: 'GetListings',
     Payload: JSON.stringify({
       zips
     })
