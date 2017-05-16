@@ -62,7 +62,7 @@ exports.handler = (event, context, callback) => {
 };
 
 /* Manual Run */
-if(process.argv > 2) 
+if(process.argv == 4) 
 {
 
 	var event = {};
