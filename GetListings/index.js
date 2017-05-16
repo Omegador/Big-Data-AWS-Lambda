@@ -64,6 +64,8 @@ exports.handler = (event, context, callback) => {
 /* Manual Run */
 if(process.argv == 4 || process.argv[2] == "manual") 
 {
+	// Start local timer
+	console.time("Execution Time");
 
 	var event = {};
 	var intermediaryObject = {};
@@ -112,7 +114,8 @@ if(process.argv == 4 || process.argv[2] == "manual")
 			console.log(output);
 		}
 	});
-
+	
+	console.timeEnd("Execution Time");
 }
 
 
