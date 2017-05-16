@@ -21,7 +21,7 @@ function gatherListings(zip, state, cb) {
 	options.url += "&location=" + zip + "%2C+" + state + "%2C+United+States";
 
 	// DEBUG
-	console.log(options);
+	// console.log(options);
 
 	// make the request to airbnb api
 	request(options, function(err, response, body) {
@@ -62,7 +62,7 @@ exports.handler = (event, context, callback) => {
 };
 
 /* Manual Run */
-if(process.argv == 4) 
+if(process.argv == 4 || process.argv[2] == "manual") 
 {
 
 	var event = {};
