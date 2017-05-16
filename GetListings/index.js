@@ -115,10 +115,14 @@ if(process.argv == 4 || process.argv[2] == "manual")
 
 }
 
+
 /* Run All */
 // only run if 3rd argument is 'all'
 if(process.argv[2] == "all") 
 {
+	// Start local timer
+	console.time("Execution Time");
+
 	zipCodes.forEach( function(element) 
 	{
 		var event = element;
@@ -159,6 +163,7 @@ if(process.argv[2] == "all")
 				console.log(output);
 			}
 		});
-	}
-
+	});
+	
+	console.timeEnd("Execution Time");
 }
