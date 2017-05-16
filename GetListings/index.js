@@ -121,7 +121,7 @@ if(process.argv == 4)
 if(process.argv[2] == "all") 
 {
 	// Start local timer
-	console.time("timer");
+	console.time("Execution Time");
 
 	zipCodes.forEach( function(element) 
 	{
@@ -165,6 +165,5 @@ if(process.argv[2] == "all")
 		});
 	});
 	
-	console.timeEnd("timer");
-	console.log("Time difference: " + timer);
+	console.timeEnd("Execution Time");
 }
