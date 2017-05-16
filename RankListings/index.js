@@ -4,7 +4,7 @@ var util = require('util');
 // range from which to get Zillow listings
 const LONGITUDE_RANGE = 5000000;
 const LATITUDE_RANGE = 500000;
-const ZILLOW_LISTINGS_DESIRED = 10;
+const ZILLOW_LISTINGS_DESIRED = 200;
 
 //
 // @about - gathers Zillow listings in a small area, centered at the provided latitude/longitude
