@@ -1,5 +1,6 @@
 var request = require("request");
 var util = require('util');
+var zipCodes = require('./data.json');
 
 
 //
@@ -63,6 +64,7 @@ exports.handler = (event, context, callback) => {
 /* Manual Run */
 if(process.argv > 2) 
 {
+
 	var event = {};
 	var intermediaryObject = {};
 	var output = [];
@@ -110,5 +112,53 @@ if(process.argv > 2)
 			console.log(output);
 		}
 	});
+
+}
+
+/* Run All */
+// only run if 3rd argument is 'all'
+if(process.argv[2] == "all") 
+{
+	zipCodes.forEach( function(element) 
+	{
+		var event = element;
+		var intermediaryObject = {};
+		var output = [];
+
+		console.log("INFO - running in manual mode.");
+
+
+		gatherListings(event.zip, event.state, function(err, listings) {
+			if(err) console.log("ERROR: %s", err);
+			else {
+
+				// create each listing object
+				listings.forEach(function(listing) {
+					// construct listing object
+					intermediaryObject.id = listing.listing.id;
+					intermediaryObject.name = listing.listing.name;
+					intermediaryObject.beds = listing.listing.beds;
+					intermediaryObject.pricePerNight = listing.pricing_quote.rate.amount;
+					intermediaryObject.location = {
+						lat: listing.listing.lat,
+						long: listing.listing.lng
+					};
+
+					output.push(JSON.stringify(intermediaryObject));
+
+					// DEBUG 
+					// console.log("Listing id: %s", listing.listing.id);
+					// console.log("Listing name: %s", listing.listing.name);
+					// console.log("Number of beds: %s", listing.listing.beds);
+					// console.log("Price per night: $%s", listing.pricing_quote.rate.amount);
+					// console.log("Location: %s Lat, %s Long", listing.listing.lat, listing.listing.lng);
+					// console.log("---------------------------------------------");
+				});
+
+				// since this is manual mode, print the output to terminal
+				console.log(output);
+			}
+		});
+	}
 
 }
