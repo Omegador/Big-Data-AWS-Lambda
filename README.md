@@ -1,18 +1,13 @@
 # CS 494 - Big Data
-## #{ENTER OUR PROJECT NAME HERE}
+## Setup
+Each AWS Lambda big data example is in its own folder.
+You must have an AWS account and AWS access keys with
+permission to use Lambda. 
 
-<b>Contributors</b>
+## Contributors
 
 Vladislav Savranschi: https://github.com/Omegador
 
-Brian Smith: #{GITHUB URL}
+Brian Smith: https://github.com/smithb1994
 
 Max Wiegant: https://github.com/mwiegant
-
-<b>External APIs and products used:</b>
-
-AirBnB
-
-Zillow
-
-AWS Lambda
