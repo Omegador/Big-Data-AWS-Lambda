@@ -100,12 +100,12 @@ if(process.argv == 4 || process.argv[2] == "manual")
 				output.push(JSON.stringify(intermediaryObject));
 
 				// DEBUG 
-				console.log("Listing id: " + listing.listing.id);
-				console.log("Listing name: " + listing.listing.name);
-				console.log("Number of beds: " + listing.listing.beds);
-				console.log("Price per night: " + listing.pricing_quote.rate.amount);
-				console.log("Location: " + listing.listing.lat + " Lat " + listing.listing.lng + " Long");
-				console.log("---------------------------------------------");
+				//console.log("Listing id: " + listing.listing.id);
+				//console.log("Listing name: " + listing.listing.name);
+				//console.log("Number of beds: " + listing.listing.beds);
+				//console.log("Price per night: " + listing.pricing_quote.rate.amount);
+				//console.log("Location: " + listing.listing.lat + " Lat " + listing.listing.lng + " Long");
+				//console.log("---------------------------------------------");
 			});
 
 			// since this is manual mode, print the output to terminal
@@ -151,12 +151,12 @@ if(process.argv[2] == "all")
 					output.push(JSON.stringify(intermediaryObject));
 
 					// DEBUG 
-				console.log("Listing id: " + listing.listing.id);
-				console.log("Listing name: " + listing.listing.name);
-				console.log("Number of beds: " + listing.listing.beds);
-				console.log("Price per night: " + listing.pricing_quote.rate.amount);
-				console.log("Location: " + listing.listing.lat + " Lat " + listing.listing.lng + " Long");
-				console.log("---------------------------------------------");
+				//console.log("Listing id: " + listing.listing.id);
+				//console.log("Listing name: " + listing.listing.name);
+				//console.log("Number of beds: " + listing.listing.beds);
+				//console.log("Price per night: " + listing.pricing_quote.rate.amount);
+				//console.log("Location: " + listing.listing.lat + " Lat " + listing.listing.lng + " Long");
+				//console.log("---------------------------------------------");
 				});
 
 				// since this is manual mode, print the output to terminal
