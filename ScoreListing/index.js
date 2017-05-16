@@ -1,8 +1,6 @@
 var request = require("request");
 var util = require('util');
 
-
-//
 // @about - gathers Zillow listings in a small area, centered at the provided latitude/longitude
 // @param lat - the latitude at the center of area
 // @param long - the longitude at the center of area
@@ -10,7 +8,8 @@ var util = require('util');
 // @return error - return error if there was one
 // @return data - return listings if no error
 //
-function gatherZillowListings(lat, long, cb) {
+function gatherZillowListings(lat, long, cb) 
+{
 	var options = {};
  	options.url = "https://www.zillow.com/search/GetResults.htm?spt=homes&status=001000&lt=000000&ht=111001&pr=,500000&days=12m&mp=,&bd=0%2C&ba=0%2C&sf=,&lot=0%2C&yr=,&singlestory=0&hoa=0%2C&pho=0&pets=0&parking=0&laundry=0&income-restricted=0&pnd=0&red=0&zso=0&ds=all&pmf=1&pf=1&sch=100111&zoom=15&p=1&sort=globalrelevanceex&search=maplist&rid=13478&rt=6&listright=true&isMapSearch=true&zoom=15";
 
