@@ -2,8 +2,8 @@ var aws = require('aws-sdk');
 var zipCodes = require('./data.json');
 
 var lambda = new aws.Lambda({
-  accessKeyId: 'AKIAJSAKDSVLYH7ZIZEQ',
-  secretAccessKey: '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',
+  accessKeyId: 'AKIAIIEFLYAJX566ZTLA',
+  secretAccessKey: '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',
   region: 'us-east-1'
 });
 
