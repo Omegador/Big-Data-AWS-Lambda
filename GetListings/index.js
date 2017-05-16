@@ -9,7 +9,12 @@ var util = require('util');
 // @return error - return error if there was one
 // @return data - return listings if no error
 //
+<<<<<<< HEAD
 function gatherListings(zip, state, cb) {
+=======
+function gatherListings(zip, cb) 
+{
+>>>>>>> 81a533ff1b236604a2d8c0667d1a533cfc2e0b06
 	var options = {};
  	options.url = "https://www.airbnb.com/api/v2/explore_tabs?version=1.1.0&_format=for_explore_search_web&items_per_grid=60000&fetch_filters=true&supports_for_you_v3=true&timezone_offset=-420&auto_ib=true&tab_id=home_tab&allow_override%5B%5D=&key=d306zoyjsyarp7ifhu67rjxn52tv0t20&currency=USD&locale=en";
 	options.headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'};
@@ -61,9 +66,11 @@ exports.handler = (event, context, callback) => {
 
 /* Manual Run */
 // only run if 3rd argument is 'manual'
-if(process.argv[2] == "manual") {
+if(process.argv[2] == "manual") 
+{
 
-	var event = {
+	var event = 
+	{
 		// Elko zip code
 		zip: 89801,
 		state: "NV"
@@ -107,5 +114,3 @@ if(process.argv[2] == "manual") {
 	});
 
 }
-
-
